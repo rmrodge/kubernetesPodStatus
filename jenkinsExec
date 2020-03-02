@@ -1,0 +1,12 @@
+whoami
+status=$(ssh USERNAME@SERVERTHATHASKUBECTL" 
+kubectl get pod --namespace NAMESPACENAME -o custom-columns=CONTAINER:.spec.containers[0].name,CONTAINER:.status.phase | grep DEPLOYMENTNAME")
+
+
+
+app=$(echo $status | awk '{print $1}')
+status=$(echo $status | awk '{print $NF}')
+
+
+if [ "$status" == "Running" ]; then echo "Running"; else exit 1;
+fi
